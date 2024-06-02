@@ -16,6 +16,10 @@ import AddItems from "../Pages/Dashboard/AddItems/AddItems";
 import AdminRoute from "./AdminRoute";
 import ManageItems from "../Pages/Dashboard/ManageItems/ManageItems";
 import UpdateItem from "../Pages/Dashboard/UpdateItem/UpdateItem";
+import Payment from "../Pages/Dashboard/Payment/Payment";
+import PaymentHistory from "../Pages/Dashboard/PaymentHistory/PaymentHistory";
+import UserHome from "../Pages/Dashboard/UserHome/UserHome";
+import AdminHome from "../Pages/Dashboard/AdminHome/AdminHome";
 
   export const router = createBrowserRouter([
     {
@@ -52,13 +56,32 @@ import UpdateItem from "../Pages/Dashboard/UpdateItem/UpdateItem";
       path:'dashboard',
       element:<PrivateRoutes><Dashboard></Dashboard></PrivateRoutes>,
       children:[
+
+        {
+
+          path:'userHome',
+          element:<UserHome></UserHome>
+        },
         {
           path:'cart',
           element:<Cart></Cart>
           
         },
+        {
+          path:'paymentHistory',
+          element:<PaymentHistory></PaymentHistory>
+        },
+        {
+          path:'payment',
+          element:<Payment></Payment>
+        },
 
         //admin only routes
+        {
+
+          path:'adminHome',
+          element:<AdminRoute><AdminHome></AdminHome></AdminRoute>
+        },
         {
           path:'addItems',
           element:<AdminRoute><AddItems></AddItems></AdminRoute>
@@ -70,7 +93,7 @@ import UpdateItem from "../Pages/Dashboard/UpdateItem/UpdateItem";
         {
           path:'updateItem/:id',
           element:<AdminRoute><UpdateItem></UpdateItem></AdminRoute>,
-          loader:({params}) => fetch(`http://localhost:5000/menu/${params.id}`)
+          loader:({params}) => fetch(`https://bistro-boss-restaurant-server-olive-alpha.vercel.app/menu/${params.id}`)
         },
         {
           path:'users',
